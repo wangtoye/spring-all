@@ -6,11 +6,15 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author : wangye
+ * @date : 2019-11-04
+ * Description:
+ */
 @SpringBootApplication
 @EnableFeignClients
 @EnableHystrix
 @EnableSwagger2
-//@EnableApolloConfig
 public class ConsumerServiceApplication {
 
     public static void main(String[] args) {

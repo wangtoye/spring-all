@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author wangye
  */
-public class AESUtils {
+public class AesUtils {
 
     private static final String TRANSFORMATION = "AES/CBC/PKCS5Padding";
     private static final String ALGORITHM = "AES";
@@ -38,8 +38,7 @@ public class AESUtils {
      *
      * @param content 明文
      * @param key     秘钥
-     * @return
-     * @throws Exception
+     * @return 密文
      */
     public static String encrypt(String content, String key) {
         // 将返回的加密过的 byte[] 转换成Base64编码字符串  ！！！！很关键
@@ -51,8 +50,7 @@ public class AESUtils {
      *
      * @param content Base64编码的密文
      * @param key     秘钥
-     * @return
-     * @throws Exception
+     * @return 明文
      */
     public static String decrypt(String content, String key) {
         // stringToBase64() 将 Base64编码的字符串转换成 byte[]  !!!与base64ToString(）配套使用
@@ -91,14 +89,14 @@ public class AESUtils {
      * 字符串装换成 Base64
      */
 
-    public static byte[] stringToBase64(String key) {
+    private static byte[] stringToBase64(String key) {
         return Base64.decodeBase64(key.getBytes());
     }
 
     /**
      * Base64装换成字符串
      */
-    public static String base64ToString(byte[] key) {
+    private static String base64ToString(byte[] key) {
         return new Base64().encodeToString(key);
     }
 }

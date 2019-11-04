@@ -6,6 +6,11 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Calendar;
 
+/**
+ * @author : wangye
+ * @date : 2019-11-04
+ * Description: 操作jwt的redis api
+ */
 @Component
 public class JwtRedisUtil {
 
@@ -21,8 +26,8 @@ public class JwtRedisUtil {
     /**
      * 判断此token是否在黑名单中
      *
-     * @param token
-     * @return
+     * @param token 查询的key
+     * @return true false
      */
     public Boolean isBlackList(String token) {
         return redisUtil.hasKey("blacklist", token);
@@ -31,7 +36,7 @@ public class JwtRedisUtil {
     /**
      * 将token加入到redis黑名单中
      *
-     * @param token
+     * @param token 查询的key
      */
     public void addBlackList(String token) {
         redisUtil.hset("blacklist", token, "true");
@@ -64,7 +69,7 @@ public class JwtRedisUtil {
      * @param token 查询的key
      * @return HV
      */
-    public Object getIPByToken(String token) {
+    public Object getIpByToken(String token) {
         return redisUtil.getHashValue(token, "ip");
     }
 

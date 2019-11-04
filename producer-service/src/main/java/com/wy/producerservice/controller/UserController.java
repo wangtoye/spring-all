@@ -2,8 +2,7 @@ package com.wy.producerservice.controller;
 
 
 import com.wy.producerservice.entity.User;
-import com.wy.producerservice.serviceImpl.UserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.wy.producerservice.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,8 +21,11 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserServiceImpl userService;
+    private final UserServiceImpl userService;
+
+    public UserController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping(value = "/get")
     @ResponseBody

@@ -6,12 +6,15 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 import org.springframework.cloud.netflix.turbine.EnableTurbine;
 import zipkin2.server.internal.EnableZipkinServer;
 
+/**
+ * @author : wangye
+ * @date : 2019-11-04
+ * Description:
+ */
 @SpringBootApplication
 @EnableHystrixDashboard
 @EnableTurbine
-//@EnableApolloConfig
 @EnableZipkinServer
-//@EnableAdminServer
 public class CommonServiceApplication {
 
     public static void main(String[] args) {

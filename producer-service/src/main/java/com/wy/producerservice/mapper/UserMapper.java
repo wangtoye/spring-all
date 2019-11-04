@@ -15,5 +15,10 @@ import java.util.List;
  */
 public interface UserMapper extends BaseMapper<User> {
 
+    /**
+     * 查询测试
+     *
+     * @return 列表
+     */
     List<User> queryTest();
 }

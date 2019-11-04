@@ -1,7 +1,6 @@
 package com.wy.securitydemo.service;
 
 import com.wy.securitydemo.dto.UserDto;
-import com.wy.securitydemo.utils.SMD5Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,9 +21,9 @@ public class SecurityUserServiceImpl implements UserDetailsService {
     /**
      * 自定义用户数据来源
      *
-     * @param userName
-     * @return
-     * @throws UsernameNotFoundException
+     * @param userName 用户名
+     * @return 用户信息
+     * @throws UsernameNotFoundException 用户名未找到异常
      */
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {

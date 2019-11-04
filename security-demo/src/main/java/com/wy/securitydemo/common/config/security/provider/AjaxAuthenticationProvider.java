@@ -1,9 +1,9 @@
 package com.wy.securitydemo.common.config.security.provider;
 
 import com.wy.securitydemo.common.config.security.detailssource.UserWebAuthenticationDetails;
-import com.wy.securitydemo.common.config.security.encoder.SMD5PasswordEncoder;
+import com.wy.securitydemo.common.config.security.encoder.Smd5PasswordEncoder;
 import com.wy.securitydemo.service.SecurityUserServiceImpl;
-import com.wy.securitydemo.utils.AESUtils;
+import com.wy.securitydemo.utils.AesUtils;
 import com.wy.securitydemo.utils.RedisUtil;
 import io.micrometer.core.instrument.util.StringUtils;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,10 +18,8 @@ import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
- * Created with IntelliJ IDEA.
- *
- * @author: wangye
- * @date: 2019-10-09
+ * @author : wangye
+ * @date : 2019-10-09
  * Description:
  */
 @Component
@@ -31,16 +29,15 @@ public class AjaxAuthenticationProvider extends AbstractUserDetailsAuthenticatio
     private SecurityUserServiceImpl securityUserService;
 
     @Resource
-    private SMD5PasswordEncoder passwordEncoder;
+    private Smd5PasswordEncoder passwordEncoder;
 
     @Resource
     private RedisUtil redisUtil;
 
     /**
-     *
-     * @param userDetails 数据库需要校验使用的字段
+     * @param userDetails    数据库需要校验使用的字段
      * @param authentication 用户登录传的字段
-     * @throws AuthenticationException
+     * @throws AuthenticationException 认证失败异常
      */
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails,
@@ -55,7 +52,7 @@ public class AjaxAuthenticationProvider extends AbstractUserDetailsAuthenticatio
         Object value = redisUtil.get(username);
         if (Objects.nonNull(value)) {
             redisUtil.delete(username);
-            presentedPassword = AESUtils.decrypt(presentedPassword, String.valueOf(value));
+            presentedPassword = AesUtils.decrypt(presentedPassword, String.valueOf(value));
             if (!passwordEncoder.matches(presentedPassword, userDetails.getPassword())) {
                 logger.error("认证失败：密码校验失败");
                 throw new BadCredentialsException("认证失败：密码校验失败");

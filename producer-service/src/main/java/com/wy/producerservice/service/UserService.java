@@ -1,7 +1,7 @@
 package com.wy.producerservice.service;
 
-import com.wy.producerservice.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.wy.producerservice.entity.User;
 
 /**
  * <p>

@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * @author wangye
  * @date 2019/10/18
- * @description
+ * description 用户信息
  */
 @Data
 public class UserDto implements UserDetails, Serializable {
@@ -79,7 +79,7 @@ public class UserDto implements UserDetails, Serializable {
     /**
      * 账户未过期
      *
-     * @return
+     * @return true false
      */
     @Override
     public boolean isAccountNonExpired() {
@@ -89,18 +89,28 @@ public class UserDto implements UserDetails, Serializable {
     /**
      * 账户未锁定
      *
-     * @return
+     * @return true false
      */
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    /**
+     * 密码未过期
+     *
+     * @return true false
+     */
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    /**
+     * 用户是否有效
+     *
+     * @return true false
+     */
     @Override
     public boolean isEnabled() {
         return true;

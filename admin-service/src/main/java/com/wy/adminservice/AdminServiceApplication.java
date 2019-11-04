@@ -5,6 +5,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
+/**
+ * @author : wangye
+ * @date : 2019-11-04
+ * Description:
+ */
 @SpringBootApplication
 @EnableAdminServer
 @EnableWebSecurity

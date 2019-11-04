@@ -3,17 +3,12 @@ package com.wy.consumerservice.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
  *
- * @author: wangye
- * @date: 2019-04-17
+ * @author : wangye
+ * @date : 2019-04-17
  * Description:
  */
 @Controller
@@ -22,7 +17,7 @@ public class WebController {
     /**
      * 默认首页
      *
-     * @return
+     * @return 首页
      */
     @RequestMapping(value = {"/", "/index"})
     public String index() {
@@ -32,8 +27,8 @@ public class WebController {
     /**
      * web一级模块页面控制器
      *
-     * @param page
-     * @return
+     * @param page 页面
+     * @return 页面
      */
     @RequestMapping("/web/{page}")
     public String showPage(@PathVariable String page) {
@@ -43,9 +38,9 @@ public class WebController {
     /**
      * web 二级模块页面控制器
      *
-     * @param model
-     * @param page
-     * @return
+     * @param model 一级模块
+     * @param page 页面
+     * @return 页面
      */
     @RequestMapping("/web/{model}/{page}")
     public String showPages(@PathVariable String model, @PathVariable String page) {
