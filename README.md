@@ -1,3 +1,6 @@
+这是一套个人搭建的基于springboot2.1.4&springcloud Greenwich.SR1
+的springdemo，基本上可以满足生产的简单运用。
+
 ## 本地HOST配置
 127.0.0.1 eureka-test1.joinboom.net  
 127.0.0.1 eureka-test2.joinboom.net  
@@ -10,7 +13,7 @@
 127.0.0.1 security-test.joinboom.net  
 
 
-##服务名--描述--应用端口号--监控端口号
+## 服务名--描述--应用端口号--监控端口号
 eureka-service1--注册中心1--7201--8201  
 eureka-service2--注册中心2--7202--8202  
 gateway-service--网关中心--7203--8203  
