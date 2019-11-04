@@ -1,0 +1,107 @@
+#应用配置
+spring:
+  cloud:        # spring cloud gateway 路由配置方式
+    gateway:
+      discovery:
+        locator:      #路由访问方式：http://Gateway_HOST:Gateway_PORT/serviceId/**，其中微服务应用名默认大写访问。
+          enabled: true #true开启通过服务中心的自动根据serviceId创建路由的功能
+          lowerCaseServiceId: true #开启小写serviceId识别
+      routes:
+        - id: consumer-route  #网关路由到服务
+          uri: lb://consumer-service
+          predicates:
+            - Path=/consumer/** #匹配consumer前缀请求，可以通过下面的过滤器给去除，目的是不暴露
+            - Method=GET,POST #支持GET和POST请求
+          filters:
+            - RewritePath=/consumer/(?<segment>.*), /$\{segment} #效果同去除地址前缀
+            #            - StripPrefix=1  #去除地址前缀 1表示去除第一层，2表示去除两层
+            - AddRequestHeader=testHead,testValue #在请求头里面加一条信息
+            # 熔断降级配置
+            - name: Hystrix
+              args:
+                name: default
+                fallbackUri: forward:/defaultFallback #统一熔断处理
+            - ComputingTime #自定义GatewayFilterFactory 无参数
+  zipkin:
+    sender:
+      #使用http方式发送统计数据 支持RABBIT KAFKA WEB(http)
+      type: web
+    #可以使用url或者注册中心的serviceId
+    base-url: http://common-service/
+    #使用服务发现
+    discoveryClientEnabled: true
+  sleuth:
+    sampler:
+      #1表示全量采集，默认0.1表示采集10%
+      probability: 1
+  boot:
+    admin:
+      client:
+        #监控周期
+        period: 2000
+#内置tomcat配置
+server:
+  port: 7203
+#注册中心配置
+eureka:
+  instance:
+    hostname: gateway-test.joinboom.net
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    #eureka客户需要多长时间发送心跳给eureka服务器，表明它仍然活着,默认为30 秒
+    lease-renewal-interval-in-seconds: 1
+    #Eureka服务器在接收到实例的最后一次发出的心跳后，需要等待多久才可以将此实例删除，默认为90秒
+    lease-expiration-duration-in-seconds: 3
+    health-check-url-path: /monitor/health
+    status-page-url-path: /monitor/info
+    metadata-map:
+      #cluster设置可以配合turbine进行分组监控
+      cluster: test2
+      management.context-path: /monitor
+  client:
+    loginUser:
+      - eureka1
+      - eureka2
+    loginPassword:
+      - eureka1
+      - eureka2
+    service-url:
+      defaultZone: http://${eureka.client.loginUser[0]}:${eureka.client.loginPassword[0]}@eureka-test1.joinboom.net:7201/eureka,http://${eureka.client.loginUser[1]}:${eureka.client.loginPassword[1]}@eureka-test2.joinboom.net:7202/eureka
+    #初始化实例信息到Eureka服务端的间隔时间，默认为40秒
+    initial-instance-info-replication-interval-seconds: 1
+    #询问Eureka服务url信息变化的时间间隔（s），默认为300秒
+    eurekaServiceUrlPollIntervalSeconds: 60
+    #更新实例信息的变化到Eureka服务端的间隔时间
+    instance-info-replication-interval-seconds: 1
+    #从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
+    registry-fetch-interval-seconds: 1
+#熔断配置
+hystrix:
+  command:
+    consumer-service: #针对消费者服务的调用，使用default则全局有效
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000 #断路器超时时间，默认1000ms。timeout.enabled为true生效
+ribbon:
+  eager-load:
+    enabled: true #开启饥饿加载机制，防止每个服务第一次ribbon调用时间过长
+    clients: consumer-service,common-service #需要开启饥饿加载机制的服务
+#附加的监控端点
+management:
+  server:
+    port: 8203
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /monitor
+  endpoint:
+    health:
+      show-details: always
+#日志配置
+logging:
+  level:
+    root: info
+    com.wy: debug
+    org.springframework.cloud.netflix: debug
+    org.springframework.web: info

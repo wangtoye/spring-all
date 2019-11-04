@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.wy</groupId>
+    <artifactId>spring-all</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>spring-all</name>
+    <description>父级pom</description>
+
+    <modules>
+        <!--注册中心 服务列表，上下线-->
+        <module>eureka-service1</module>
+        <module>eureka-service2</module>
+        <!--网关中心 外部流量接入层-->
+        <module>gateway-service</module>
+        <!--服务提供者和服务消费者 在实际情况下，一个应用大多是同时提供服务也消费服务-->
+        <module>producer-service</module>
+        <module>consumer-service</module>
+        <!--通用模块 熔断器控制台，请求链控制台-->
+        <module>common-service</module>
+        <!--服务监控中心 检测服务状态-->
+        <module>admin-service</module>
+        <!--安全登录框架demo-->
+        <module>security-demo</module>
+    </modules>
+
+</project>

@@ -1,0 +1,134 @@
+#应用配置
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+  zipkin:
+    sender:
+      #使用http方式发送统计数据 支持RABBIT KAFKA WEB(http)
+      type: web
+    #可以使用url或者注册中心的serviceId
+    base-url: http://common-service/
+    #使用服务发现
+    discoveryClientEnabled: true
+  sleuth:
+    sampler:
+      #1表示全量采集，默认0.1表示采集10%
+      probability: 1
+  boot:
+    admin:
+      client:
+        #监控周期
+        period: 2000
+  security:
+    user:
+      name: consumer
+      password: consumer
+#内置tomcat配置
+server:
+  port: 7205
+#注册中心配置
+eureka:
+  instance:
+    hostname: consumer-test.joinboom.net
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    #eureka客户需要多长时间发送心跳给eureka服务器，表明它仍然活着,默认为30 秒
+    lease-renewal-interval-in-seconds: 1
+    #Eureka服务器在接收到实例的最后一次发出的心跳后，需要等待多久才可以将此实例删除，默认为90秒
+    lease-expiration-duration-in-seconds: 3
+    health-check-url-path: /monitor/health
+    status-page-url-path: /monitor/info
+    metadata-map:
+      #cluster设置可以配合turbine进行分组监控
+      cluster: test
+      #本服务的metadata信息，提交到服务端
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+      management.context-path: /monitor
+  client:
+    loginUser:
+      - eureka1
+      - eureka2
+    loginPassword:
+      - eureka1
+      - eureka2
+    service-url:
+      defaultZone: http://${eureka.client.loginUser[0]}:${eureka.client.loginPassword[0]}@eureka-test1.joinboom.net:7201/eureka,http://${eureka.client.loginUser[1]}:${eureka.client.loginPassword[1]}@eureka-test2.joinboom.net:7202/eureka
+    #初始化实例信息到Eureka服务端的间隔时间，默认为40秒
+    initial-instance-info-replication-interval-seconds: 1
+    #更新实例信息的变化到Eureka服务端的间隔时间
+    instance-info-replication-interval-seconds: 1
+    #从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
+    registry-fetch-interval-seconds: 1
+#远程调用配置
+feign:
+  hystrix:
+    enabled: true #熔断机制开启
+  httpclient:
+    enabled: true #使用阿帕奇的httpclient，默认是true，不配置也行，直接加上连接池配置即可
+#  okttp:
+#    enabled: true #使用okhttp，开启时需要把httpclient.enable置为false
+#  compression:
+#    request:
+#      enabled: true #配置请求GZIP压缩
+#      mime-types: application/json #压缩支持的MIME TYPE
+#      min-request-size: 2048 #压缩数据大小的下限
+#    response:
+#      enabled: true #配置响应GZIP压缩
+#熔断配置
+hystrix:
+  command:
+    default: #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          #如果enabled设置为false，则请求超时交给ribbon控制,timeoutInMilliseconds无效;
+          #为true,则优先查看ribbon的超时时间，小于timeoutInMilliseconds则以ribbon为准，大于则以timeoutInMilliseconds为准。
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000 #断路器超时时间，默认1000ms。timeout.enabled为true生效
+  threadpool:
+    default:
+      coreSize: 10 #最小线程数
+      maxQueueSize: 50 #最大线程数 不可被动态修改
+      queueSizeRejectionThreshold: 20 #可被动态修改的最大线程数，只有maxQueueSize为正数的时候这个值才会生效
+ribbon:
+  ReadTimeout: 2000 #ribbon单次请求超时时间，总超时时间=ReadTimeout*（1+MaxAutoRetries），且总时间小于等于熔断超时时间。
+  ConnectTimeout: 3000
+  MaxAutoRetries: 0 #同一台实例最大重试次数,不包括首次调用
+  MaxAutoRetriesNextServer: 0 #重试负载均衡其他的实例最大重试次数,不包括首次调用,如果只有一个实例，此处效果等同于MaxAutoRetries
+  OkToRetryOnAllOperations: true  #是否所有操作都重试 默认GET重试
+  eager-load:
+    enabled: true #开启饥饿加载机制，防止每个服务第一次ribbon调用时间过长
+    clients: producer-service,common-service #需要开启饥饿加载机制的服务
+#附加的监控端点
+management:
+  server:
+    port: 8205
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /monitor
+  endpoint:
+    health:
+      show-details: always
+#日志配置
+logging:
+  level:
+    root: info
+    com.wy: debug
+    org.springframework.cloud.netflix: debug
+    org.springframework.web: info
+    com.netflix.hystrix: debug
+
+#swagger配置
+#请求地址 http://consumer-test.joinboom.net:7205/swagger-ui.html
+swagger:
+  #true是开启，默认false
+  enable: true
+
+#在bootstrap阶段向spring注入对应命名空间的配置文件
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: consumer-service.yml

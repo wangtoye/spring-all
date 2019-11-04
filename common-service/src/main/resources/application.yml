@@ -1,0 +1,85 @@
+spring:
+  boot:
+    admin:
+      client:
+        #监控周期
+        period: 2000
+#内置tomcat配置
+server:
+  port: 7206
+#注册中心配置
+eureka:
+  instance:
+    hostname: common-test.joinboom.net
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    #eureka客户需要多长时间发送心跳给eureka服务器，表明它仍然活着,默认为30 秒
+    lease-renewal-interval-in-seconds: 1
+    #Eureka服务器在接收到实例的最后一次发出的心跳后，需要等待多久才可以将此实例删除，默认为90秒
+    lease-expiration-duration-in-seconds: 3
+    health-check-url-path: /monitor/health
+    status-page-url-path: /monitor/info
+    metadata-map:
+      #上送meta信息，可以调用方使用
+      management.context-path: /monitor
+  client:
+    loginUser:
+      - eureka1
+      - eureka2
+    loginPassword:
+      - eureka1
+      - eureka2
+    service-url:
+      defaultZone: http://${eureka.client.loginUser[0]}:${eureka.client.loginPassword[0]}@eureka-test1.joinboom.net:7201/eureka,http://${eureka.client.loginUser[1]}:${eureka.client.loginPassword[1]}@eureka-test2.joinboom.net:7202/eureka
+    #      defaultZone: http://eureka-dev1.joinboom.net/eureka-server/eureka/,http://eureka-dev2.joinboom.net/eureka-server/eureka/
+    #初始化实例信息到Eureka服务端的间隔时间，默认为40秒
+    initial-instance-info-replication-interval-seconds: 1
+    #询问Eureka服务url信息变化的时间间隔（s），默认为300秒
+    eurekaServiceUrlPollIntervalSeconds: 60
+    #更新实例信息的变化到Eureka服务端的间隔时间
+    instance-info-replication-interval-seconds: 1
+    #从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
+    registry-fetch-interval-seconds: 1
+#聚合监控数据
+#请求地址 http://common-test.joinboom.net:7206/hystrix
+turbine:
+  app-config: gateway-service,consumer-service,producer-service
+  #这个参数目的是为了使用cluster对监控的系统进行区分。http://common-test.joinboom.net:7206/turbine.stream?cluster=test
+  #对应的eureka client配置可以参考consumer和gateway的yml配置文件中eureka的cluster配置
+  cluster-name-expression: metadata['cluster']
+  #和cluster-name-expression搭配使用，没有此配置显示Unable to connect to Command Metric Stream
+  aggregator:
+    cluster-config: test,test2
+  #修改监控地址
+  instanceUrlSuffix: monitor/hystrix.stream
+
+#zipkin  http://common-test.joinboom.net:7206/zipkin/index.html
+management:
+  metrics:
+    web:
+      server:
+        #避免访问zipkin页面报java.lang.IllegalArgumentException
+        auto-time-requests: false
+  #附加的监控端点
+  server:
+    port: 8206
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /monitor
+  endpoint:
+    health:
+      show-details: always
+
+#日志打印
+logging:
+  level:
+    root: info
+    com.wy: debug
+    org.springframework.cloud.netflix: debug
+    org.springframework.web: trace
+#在bootstrap阶段向spring注入对应命名空间的配置文件
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: common-service.yml

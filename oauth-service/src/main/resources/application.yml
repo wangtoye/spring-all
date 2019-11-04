@@ -1,0 +1,48 @@
+#应用配置
+spring:
+  application:
+    name: oauth-service
+  redis:
+    host: dev-redis.joinboom.net
+    port: 6379
+    password: tv84mApa
+    timeout: 10000ms
+    database: 2
+    lettuce:
+      pool:
+        max-active: 16 #连接池最大连接数
+        max-idle: 8 #连接池最大空闲连接
+        min-idle: 0 #连接池最小空闲连接
+        max-wait: 1000ms #连接池最大阻塞等待时间,-1为不限制
+      shutdown-timeout: 100ms #关闭超时时间
+#内置tomcat配置
+server:
+  port: 7206
+  servlet:
+    context-path: /uaa
+#注册中心配置
+eureka:
+  instance:
+    hostname: oauth-test.joinboom.net
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+    #eureka客户需要多长时间发送心跳给eureka服务器，表明它仍然活着,默认为30 秒
+    lease-renewal-interval-in-seconds: 1
+    #Eureka服务器在接收到实例的最后一次发出的心跳后，需要等待多久才可以将此实例删除，默认为90秒
+    lease-expiration-duration-in-seconds: 3
+  client:
+    service-url:
+      defaultZone: http://eureka-test1.joinboom.net:7201/eureka,http://eureka-test2.joinboom.net:7202/eureka
+    #初始化实例信息到Eureka服务端的间隔时间，默认为40秒
+    initial-instance-info-replication-interval-seconds: 1
+    #更新实例信息的变化到Eureka服务端的间隔时间
+    instance-info-replication-interval-seconds: 1
+    #从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
+    registry-fetch-interval-seconds: 1
+#日志配置
+logging:
+  level:
+    root: info
+    com.wy: debug
+    org.springframework.cloud.netflix: debug
+    org.springframework.web: trace
+    org.springframework.cloud.netflix.zuul: trace

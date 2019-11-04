@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<meta charset="UTF-8">
+<head>
+    <title>测试demo</title>
+    <script src="/static/js/jquery-2.2.3.min.js"></script>
+    <!-- aes加密 ，前台加密，后台解密-->
+    <script src="/static/js/crypto-js.js"></script>
+    <script>
+        //定义秘钥
+        var secretKey = null;
+        var host = "http://localhost:7211";
+
+        function signup() {
+            var username = $("#username").val();
+            var password = $("#password").val();
+            var validateCode = $("#validateCode").val();
+            var rememberMe = $("#rememberMe").val();
+            //发送ajax到后台获取秘钥
+            $.ajax({
+                url: host + "/api/getSecret?userName=" + username,
+                type: "get",
+                contentType: "application/json;charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    secretKey = data.data;
+                    //密码加密
+                    password = encrypt(password, secretKey);
+                    $.ajax({
+                        url: host + "/login",
+                        type: "post",
+                        data: {
+                            "username": username,
+                            "password": password,
+                            "validateCode": validateCode,
+                            "remember-me": rememberMe
+                        },
+                        success: function (data) {
+                            var token = data.data;
+                            $.ajax({
+                                url: host + "/api/user/queryCurrentUser",
+                                type: "post",
+                                contentType: "application/json;charset=utf-8",
+                                dataType: "json",
+                                //这里是重点，登录后所有的请求都要加上token。token应该需要放到一个全局的变量里面去
+                                headers: {'Accept': 'application/json', 'Authorization': 'Bearer ' + token},
+                                success: function (data) {
+                                    //如果token失效，返回的错误码 100005 登录失效
+                                    console.log(data);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        //秘钥可以从后台获取，后台定时变更秘钥，提升安全性
+        var iv = CryptoJS.enc.Utf8.parse("A-16-Byte-String");
+
+        //aes加密
+        function encrypt(context, key) {
+            key = CryptoJS.enc.Utf8.parse(key);
+            let encrypted = CryptoJS.AES.encrypt(context, key, {
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            return encrypted.toString();
+        }
+
+    </script>
+</head>
+<body>
+<div class="signup">
+    <div class="signBox">
+        <label for="username">用户名</label><input type='text' id="username" value="admin"/><br/>
+        <label for="password">密码</label><input type="password" id="password" value="123456"/><br/>
+        <label for="validateCode">验证码</label><input type="text" id="validateCode" value="123456"/><br/>
+        <label for="rememberMe">记住我</label><input type="checkbox" id="rememberMe" checked/>
+    </div>
+</div>
+<div class="btn" id="btn" onclick="signup()">登录</div>
+</body>
+</html>

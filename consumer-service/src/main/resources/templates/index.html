@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<script src="js/jquery-2.2.3.min.js"></script>
+<body>
+hello,world!
+<br/>
+
+<button onclick="test1()">點擊</button>
+<span id="str1"></span>
+<br/>
+
+<form id="f">
+    <label for="a">a:</label><input id="a" name="a" type="text"/>
+    <br/>
+    <label for="b">b:</label><input id="b" name="b" type="text"/>
+</form>
+<br/>
+
+<button onclick="test2()">點擊</button>
+<br/>
+
+<span id="str2"></span>
+</body>
+<script type="text/javascript">
+    function test() {
+        window.location.href = "http://producer-test.joinboom.net:7209/user/getUserList";
+    }
+
+
+    function test1() {
+        $.ajax({
+            type: "GET",
+            url: "/api/test1?a=1",
+            success: function (e) {
+                $("#str1").html(e);
+            }
+        });
+    }
+
+    function test2() {
+        let param = {}
+        param.a = $("#a").val();
+        param.b = $("#b").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/api/test2",
+            dataType: "json",
+            contentType: "application/json;charset=UTF-8",
+            data: JSON.stringify(param),
+            success: function (e) {
+                $("#str2").html(e.a + e.b);
+            }
+        });
+    }
+</script>
+</html>

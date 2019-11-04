@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <properties>
+        <property name="appName">producer-service</property>
+    </properties>
+
+    <Appenders>
+        <!--这个输出控制台的配置-->
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} [%thread] %logger{32}:%L - %msg%n"/>
+        </Console>
+
+        <!-- name可以自定义，作用是在Loggers中AppenderRef中使用 -->
+        <!-- fileName定义输出文件名称（当前文件） -->
+        <!-- filePattern定义输出文件名称（文件满足条件后自动截断，生成历史文件） -->
+        <RollingFile name="DEBUG_ROLLING_FILE"
+                     fileName="/home/logs/${appName}/${appName}-debug-log"
+                     filePattern="/home/logs/${appName}/${appName}-debug-log.%d{yyyy-MM-dd}-%i">
+            <ThresholdFilter level="DEBUG"/>
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} [%thread] %logger{32}:%L - %msg%n"/>
+            <!-- 文件截断的条件，具体参考文档 -->
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+
+        <!-- 同一来源的Appender可以定义多个 -->
+        <RollingFile name="ERROR_ROLLING_FILE"
+                     fileName="/home/logs/${appName}/${appName}-error-log"
+                     filePattern="/home/logs/${appName}/${appName}-error-log.%d{yyyy-MM-dd}-%i">
+            <!-- 可以通过该参数来设置获取日志的权限 -->
+            <ThresholdFilter level="ERROR"/>
+            <PatternLayout
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} [%thread] %logger{32}:%L - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="24"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="CONSOLE"/>
+            <AppenderRef ref="DEBUG_ROLLING_FILE"/>
+            <AppenderRef ref="ERROR_ROLLING_FILE"/>
+        </Root>
+    </Loggers>
+</configuration>
