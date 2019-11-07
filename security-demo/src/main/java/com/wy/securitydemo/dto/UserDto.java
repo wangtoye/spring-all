@@ -58,7 +58,7 @@ public class UserDto implements UserDetails, Serializable {
     /**
      * 备注说明
      */
-    private String remake;
+    private String description;
 
     /**
      * 创建时间

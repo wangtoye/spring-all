@@ -20,11 +20,28 @@ spring:
         #监控周期
         period: 2000
   datasource:
-    #mysql5-com.mysql.jdbc.Driver mysql6-com.mysql.cj.jdbc.Driver
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://dev-db.joinboom.net:3306/wytest?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&tinyInt1isBit=false&serverTimezone=GMT%2B8
-    username: root
-    password: ArImzDOO
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/test
+    username: sa
+    password: sa
+    schema: classpath:db/schema.sql
+    data: classpath:db/data.sql
+  h2:
+    console:
+      #开启控制台 http://producer-test.joinboom.net:7204/h2-console
+      enabled: true
+      path: /h2-console
+      settings:
+        #允许远程连接
+        web-allow-others: true
+        #开启跟踪
+        trace: true
+#    #mysql5-com.mysql.jdbc.Driver mysql6-com.mysql.cj.jdbc.Driver
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://dev-db.joinboom.net:3306/wytest?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&tinyInt1isBit=false&serverTimezone=GMT%2B8
+#    username: root
+#    password: ArImzDOO
+
 #内置tomcat配置
 server:
   port: 7204

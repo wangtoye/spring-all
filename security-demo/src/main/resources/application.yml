@@ -32,9 +32,6 @@ spring:
     timeout: 5000
     database: 1
     host: dev-redis.joinboom.net
-  h2:
-    console:
-      enabled: true
 #内置tomcat配置
 server:
   port: 7211
