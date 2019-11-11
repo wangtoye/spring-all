@@ -27,14 +27,14 @@ public class SecurityUserServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        logger.debug("查询用户开始");
+        logger.debug("查询用户{}开始", userName);
         UserDto userDto = new UserDto();
         userDto.setUserId(1);
         userDto.setUsername("admin");
         //SMD5Utils.getPwd("123456")创建一个之后放入password，不能每次都创建，这样密码会不一致
         userDto.setPassword("{SMD5}NCjnLT2JmZm0/NYzSKkzehBXtdfGEzz1");
         userDto.setRealName("管理员");
-        logger.debug("查询用户结束");
+        logger.debug("查询用户{}结束", userName);
         return userDto;
     }
 }

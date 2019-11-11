@@ -14,7 +14,6 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -24,8 +23,8 @@ import java.util.Map;
 /**
  * Created with IntelliJ IDEA.
  *
- * @author: wangye
- * @date: 2019-09-29
+ * @author : wangye
+ * @date : 2019-09-29
  * Description: 登录成功，返回jwt
  */
 @Component
@@ -37,7 +36,7 @@ public class AjaxAuthenticationSuccessHandler implements AuthenticationSuccessHa
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
-                                        HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+                                        HttpServletResponse httpServletResponse, Authentication authentication) throws IOException {
         UserDto userDto = (UserDto) authentication.getPrincipal();
         Map<String, Object> claims = new HashMap<>(3);
         claims.put("userId", userDto.getUserId());

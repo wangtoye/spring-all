@@ -35,10 +35,10 @@ public class LoginModelController {
 
     @RequestMapping(value = "/getSecret", method = RequestMethod.GET)
     public String getSecret(@RequestParam("userName") String userName) {
-        logger.info("生成动态秘钥开始");
+        logger.info("用户{}生成动态秘钥开始", userName);
         String value = UUID.randomUUID().toString().replace("-", "");
         redisUtil.set(userName, value, expire);
-        logger.info("生成动态秘钥完成");
+        logger.info("用户{}生成动态秘钥完成", userName);
         return new Gson().toJson(ResponseUtil.buildVoByResponseCode(ResponseCode.CODE_SUCCESS, value));
     }
 

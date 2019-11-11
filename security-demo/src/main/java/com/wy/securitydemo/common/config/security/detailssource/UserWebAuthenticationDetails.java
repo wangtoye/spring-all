@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Created with IntelliJ IDEA.
  *
- * @author: wangye
- * @date: 2019-10-28
+ * @author : wangye
+ * @date : 2019-10-28
  * Description:
  */
 public class UserWebAuthenticationDetails extends WebAuthenticationDetails {

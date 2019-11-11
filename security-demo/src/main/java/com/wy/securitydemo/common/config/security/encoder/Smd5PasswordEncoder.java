@@ -29,8 +29,8 @@ public class Smd5PasswordEncoder implements PasswordEncoder {
         try {
             return Smd5Utils.verifyPwd(encodedPassword, rawPassword.toString());
         } catch (Exception e) {
-            e.printStackTrace();
             logger.error("密码验证失败-" + e.getMessage());
+            e.printStackTrace();
         }
         return false;
     }
