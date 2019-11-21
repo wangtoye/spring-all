@@ -9,7 +9,7 @@ server:
 #注册中心配置
 eureka:
   instance:
-    hostname: gateway-test.joinboom.net
+    hostname: gateway-test.wangtoye.net
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     #eureka客户需要多长时间发送心跳给eureka服务器，表明它仍然活着,默认为30 秒
     lease-renewal-interval-in-seconds: 1
@@ -17,7 +17,7 @@ eureka:
     lease-expiration-duration-in-seconds: 3
   client:
     service-url:
-      defaultZone: http://eureka-test1.joinboom.net:7201/eureka,http://eureka-test2.joinboom.net:7202/eureka
+      defaultZone: http://eureka-test1.wangtoye.net:7201/eureka,http://eureka-test2.wangtoye.net:7202/eureka
     #初始化实例信息到Eureka服务端的间隔时间，默认为40秒
     initial-instance-info-replication-interval-seconds: 1
     #更新实例信息的变化到Eureka服务端的间隔时间
@@ -78,13 +78,13 @@ management:
 security:
   oauth2:
     client:
-      access-token-uri: http://oauth-test.joinboom.net:7206/uaa/oauth/token #令牌端点
-      user-authorization-uri: http://oauth-test.joinboom.net:7206/uaa/oauth/authorize #授权端点
+      access-token-uri: http://oauth-test.wangtoye.net:7206/uaa/oauth/token #令牌端点
+      user-authorization-uri: http://oauth-test.wangtoye.net:7206/uaa/oauth/authorize #授权端点
       client-id: producer-gateway-service #OAuth2客户端ID
       client-secret: 123456 #OAuth2客户端密钥
     resource:
-      #      token-info-uri: http://oauth-test.joinboom.net:7206/oauth/check_token # 验证token的接口
-      #      user-info-uri: http://oauth-test.joinboom.net:7206/user # 一个可以获取认证授权的自定义接口，可以在授权服务器，也可以在其他服务器上
+      #      token-info-uri: http://oauth-test.wangtoye.net:7206/oauth/check_token # 验证token的接口
+      #      user-info-uri: http://oauth-test.wangtoye.net:7206/user # 一个可以获取认证授权的自定义接口，可以在授权服务器，也可以在其他服务器上
       #      prefer-token-info: false # 如果同时配置了token-info-uri 和 user-info-uri，这个现象设置使用哪个取验证授权
       jwt:
         key-value: wangye10 #使用对称加密方式，默认算法为HS256

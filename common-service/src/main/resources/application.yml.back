@@ -8,7 +8,7 @@ server:
 #注册中心配置
 eureka:
   instance:
-    hostname: common-test.joinboom.net
+    hostname: common-test.wangtoye.net
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     #eureka客户需要多长时间发送心跳给eureka服务器，表明它仍然活着,默认为30 秒
     lease-renewal-interval-in-seconds: 1
@@ -16,8 +16,8 @@ eureka:
     lease-expiration-duration-in-seconds: 3
   client:
     service-url:
-      defaultZone: http://eureka-test1.joinboom.net:7201/eureka,http://eureka-test2.joinboom.net:7202/eureka
-    #      defaultZone: http://eureka-dev1.joinboom.net/eureka-server/eureka/,http://eureka-dev2.joinboom.net/eureka-server/eureka/
+      defaultZone: http://eureka-test1.wangtoye.net:7201/eureka,http://eureka-test2.wangtoye.net:7202/eureka
+    #      defaultZone: http://eureka-dev1.wangtoye.net/eureka-server/eureka/,http://eureka-dev2.wangtoye.net/eureka-server/eureka/
     #初始化实例信息到Eureka服务端的间隔时间，默认为40秒
     initial-instance-info-replication-interval-seconds: 1
     #询问Eureka服务url信息变化的时间间隔（s），默认为300秒
@@ -27,7 +27,7 @@ eureka:
     #从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
     registry-fetch-interval-seconds: 1
 #聚合监控数据
-#请求地址 http://common-test.joinboom.net:7206/hystrix
+#请求地址 http://common-test.wangtoye.net:7206/hystrix
 turbine:
   app-config: gateway-service,consumer-service,producer-service
   #这个参数目的是为了使用cluster对监控的系统进行区分。http://ip:port/turbine.stream?cluster=test

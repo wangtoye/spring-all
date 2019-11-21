@@ -29,15 +29,15 @@
 
 
 ## 本地HOST配置
-127.0.0.1 eureka-test1.joinboom.net  
-127.0.0.1 eureka-test2.joinboom.net  
-127.0.0.1 producer-test.joinboom.net  
-127.0.0.1 consumer-test.joinboom.net  
-127.0.0.1 gateway-test.joinboom.net  
-127.0.0.1 common-test.joinboom.net  
-127.0.0.1 config-test.joinboom.com  
-127.0.0.1 admin-test.joinboom.net  
-127.0.0.1 security-test.joinboom.net  
+127.0.0.1 eureka-test1.wangtoye.net  
+127.0.0.1 eureka-test2.wangtoye.net  
+127.0.0.1 producer-test.wangtoye.net  
+127.0.0.1 consumer-test.wangtoye.net  
+127.0.0.1 gateway-test.wangtoye.net  
+127.0.0.1 common-test.wangtoye.net  
+127.0.0.1 config-test.wangtoye.net  
+127.0.0.1 admin-test.wangtoye.net  
+127.0.0.1 security-test.wangtoye.net  
 
 ## 服务名--描述--应用端口号--监控端口号
 eureka-service1--注册中心1--7201--8201  

@@ -10,7 +10,7 @@ server:
 #注册中心配置
 eureka:
   instance:
-    hostname: common-test.joinboom.net
+    hostname: common-test.wangtoye.net
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     #eureka客户需要多长时间发送心跳给eureka服务器，表明它仍然活着,默认为30 秒
     lease-renewal-interval-in-seconds: 1
@@ -29,8 +29,8 @@ eureka:
       - eureka1
       - eureka2
     service-url:
-      defaultZone: http://${eureka.client.loginUser[0]}:${eureka.client.loginPassword[0]}@eureka-test1.joinboom.net:7201/eureka,http://${eureka.client.loginUser[1]}:${eureka.client.loginPassword[1]}@eureka-test2.joinboom.net:7202/eureka
-    #      defaultZone: http://eureka-dev1.joinboom.net/eureka-server/eureka/,http://eureka-dev2.joinboom.net/eureka-server/eureka/
+      defaultZone: http://${eureka.client.loginUser[0]}:${eureka.client.loginPassword[0]}@eureka-test1.wangtoye.net:7201/eureka,http://${eureka.client.loginUser[1]}:${eureka.client.loginPassword[1]}@eureka-test2.wangtoye.net:7202/eureka
+    #      defaultZone: http://eureka-dev1.wangtoye.net/eureka-server/eureka/,http://eureka-dev2.wangtoye.net/eureka-server/eureka/
     #初始化实例信息到Eureka服务端的间隔时间，默认为40秒
     initial-instance-info-replication-interval-seconds: 1
     #询问Eureka服务url信息变化的时间间隔（s），默认为300秒
@@ -40,10 +40,10 @@ eureka:
     #从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
     registry-fetch-interval-seconds: 1
 #聚合监控数据
-#请求地址 http://common-test.joinboom.net:7206/hystrix
+#请求地址 http://common-test.wangtoye.net:7206/hystrix
 turbine:
   app-config: gateway-service,consumer-service,producer-service
-  #这个参数目的是为了使用cluster对监控的系统进行区分。http://common-test.joinboom.net:7206/turbine.stream?cluster=test
+  #这个参数目的是为了使用cluster对监控的系统进行区分。http://common-test.wangtoye.net:7206/turbine.stream?cluster=test
   #对应的eureka client配置可以参考consumer和gateway的yml配置文件中eureka的cluster配置
   cluster-name-expression: metadata['cluster']
   #和cluster-name-expression搭配使用，没有此配置显示Unable to connect to Command Metric Stream
@@ -52,7 +52,7 @@ turbine:
   #修改监控地址
   instanceUrlSuffix: monitor/hystrix.stream
 
-#zipkin  http://common-test.joinboom.net:7206/zipkin/index.html
+#zipkin  http://common-test.wangtoye.net:7206/zipkin/index.html
 management:
   metrics:
     web:

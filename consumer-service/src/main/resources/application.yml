@@ -29,7 +29,7 @@ server:
 #注册中心配置
 eureka:
   instance:
-    hostname: consumer-test.joinboom.net
+    hostname: consumer-test.wangtoye.net
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     #eureka客户需要多长时间发送心跳给eureka服务器，表明它仍然活着,默认为30 秒
     lease-renewal-interval-in-seconds: 1
@@ -52,7 +52,7 @@ eureka:
       - eureka1
       - eureka2
     service-url:
-      defaultZone: http://${eureka.client.loginUser[0]}:${eureka.client.loginPassword[0]}@eureka-test1.joinboom.net:7201/eureka,http://${eureka.client.loginUser[1]}:${eureka.client.loginPassword[1]}@eureka-test2.joinboom.net:7202/eureka
+      defaultZone: http://${eureka.client.loginUser[0]}:${eureka.client.loginPassword[0]}@eureka-test1.wangtoye.net:7201/eureka,http://${eureka.client.loginUser[1]}:${eureka.client.loginPassword[1]}@eureka-test2.wangtoye.net:7202/eureka
     #初始化实例信息到Eureka服务端的间隔时间，默认为40秒
     initial-instance-info-replication-interval-seconds: 1
     #更新实例信息的变化到Eureka服务端的间隔时间
@@ -122,7 +122,7 @@ logging:
     com.netflix.hystrix: debug
 
 #swagger配置
-#请求地址 http://consumer-test.joinboom.net:7205/swagger-ui.html
+#请求地址 http://consumer-test.wangtoye.net:7205/swagger-ui.html
 swagger:
   #true是开启，默认false
   enable: true

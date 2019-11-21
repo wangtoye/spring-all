@@ -31,14 +31,14 @@ spring:
         min-idle: 0
     timeout: 5000
     database: 1
-    host: dev-redis.joinboom.net
+    host: dev-redis.wangtoye.net
 #内置tomcat配置
 server:
   port: 7211
 #注册中心配置
 eureka:
   instance:
-    hostname: security-test.joinboom.net
+    hostname: security-test.wangtoye.net
     instance-id: ${spring.cloud.client.ip-address}:${server.port}
     #eureka客户需要多长时间发送心跳给eureka服务器，表明它仍然活着,默认为30 秒
     lease-renewal-interval-in-seconds: 1
@@ -58,7 +58,7 @@ eureka:
       - eureka1
       - eureka2
     service-url:
-      defaultZone: http://${eureka.client.loginUser[0]}:${eureka.client.loginPassword[0]}@eureka-test1.joinboom.net:7201/eureka,http://${eureka.client.loginUser[1]}:${eureka.client.loginPassword[1]}@eureka-test2.joinboom.net:7202/eureka
+      defaultZone: http://${eureka.client.loginUser[0]}:${eureka.client.loginPassword[0]}@eureka-test1.wangtoye.net:7201/eureka,http://${eureka.client.loginUser[1]}:${eureka.client.loginPassword[1]}@eureka-test2.wangtoye.net:7202/eureka
     #初始化实例信息到eureka服务端的间隔时间，默认为40秒
     initial-instance-info-replication-interval-seconds: 1
     #询问eureka服务url信息变化的时间间隔（s），默认为300秒
