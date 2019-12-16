@@ -92,9 +92,9 @@ hystrix:
             timeoutInMilliseconds: 10000 #断路器超时时间，默认1000ms。timeout.enabled为true生效
   threadpool:
     default:
-      coreSize: 10 #最小线程数
-      maxQueueSize: 50 #最大线程数 不可被动态修改
-      queueSizeRejectionThreshold: 20 #可被动态修改的最大线程数，只有maxQueueSize为正数的时候这个值才会生效
+      coreSize: 10 #最小线程数 默认10
+      maxQueueSize: 50 #最大线程数 不可被动态修改 默认-1，为-1时，queueSizeRejectionThreshold不生效
+      queueSizeRejectionThreshold: 40 #可被动态修改的最大线程数，和maxQueueSize同时生效，超出则直接报错
 ribbon:
   ReadTimeout: 1000 #ribbon单次请求超时时间，总超时时间=ReadTimeout*（1+MaxAutoRetries），且总时间小于等于熔断超时时间。
   ConnectTimeout: 3000

@@ -19,8 +19,7 @@ public class AesUtils {
     private static final String TRANSFORMATION = "AES/CBC/PKCS5Padding";
     private static final String ALGORITHM = "AES";
     /**
-     * 必须16位
-     * 初始化向量IV不可以为32位，否则异常java.security.InvalidAlgorithmParameterException: Wrong IV length: must be 16 bytes long
+     * 初始化向量IV 长度为16/32位
      */
     private static final String IV = "A-16-Byte-String";
 
@@ -53,7 +52,7 @@ public class AesUtils {
      * @return 明文
      */
     public static String decrypt(String content, String key) {
-        // stringToBase64() 将 Base64编码的字符串转换成 byte[]  !!!与base64ToString(）配套使用
+        // stringToBase64() 将 Base64编码的字符串转换成 byte[] 与base64ToString()配套使用
         byte[] bytes = decrypt(stringToBase64(content), key.getBytes());
         if (bytes == null) {
             return null;
@@ -99,4 +98,5 @@ public class AesUtils {
     private static String base64ToString(byte[] key) {
         return new Base64().encodeToString(key);
     }
+
 }
