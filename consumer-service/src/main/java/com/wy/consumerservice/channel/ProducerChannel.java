@@ -1,6 +1,7 @@
 package com.wy.consumerservice.channel;
 
 import com.wy.consumerservice.channel.impl.ProducerChannelImpl;
+import com.wy.consumerservice.common.config.FeignConfiguration;
 import com.wy.consumerservice.dto.TestDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @date: 2019-04-17
  * Description:
  */
-@FeignClient(name = "producer-service", fallback = ProducerChannelImpl.class)
+@FeignClient(name = "producer-service", fallback = ProducerChannelImpl.class, configuration = FeignConfiguration.class)
 public interface ProducerChannel {
 
     /**

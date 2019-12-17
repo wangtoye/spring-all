@@ -1,4 +1,4 @@
-package com.wy.consumerservice.common;
+package com.wy.consumerservice.common.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

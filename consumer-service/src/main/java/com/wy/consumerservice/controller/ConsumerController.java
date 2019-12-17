@@ -2,6 +2,7 @@ package com.wy.consumerservice.controller;
 
 import com.wy.consumerservice.channel.ProducerChannel;
 import com.wy.consumerservice.dto.TestDto;
+import com.wy.consumerservice.utils.ThreadLocalUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
+import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -35,11 +36,19 @@ public class ConsumerController {
             java.lang.Integer.class)
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     public String test1(@RequestParam("a") Integer a, HttpServletRequest request) {
-        Enumeration<String> enumeration = request.getHeaderNames();
-        while (enumeration.hasMoreElements()) {
-            String head = enumeration.nextElement();
-            System.out.println(head + ":" + request.getHeader(head));
-        }
+//        Enumeration<String> enumeration = request.getHeaderNames();
+//        while (enumeration.hasMoreElements()) {
+//            String head = enumeration.nextElement();
+//            System.out.println(head + ":" + request.getHeader(head));
+//        }
+        long threadId = Thread.currentThread().getId();
+        ThreadLocalUtil.set("threadId", threadId);
+        System.out.println("主线程，线程id：" + threadId);
+
+        Integer randomNum = new Random().nextInt(100);
+        ThreadLocalUtil.set("randomNum", randomNum);
+        System.out.println("主线程，随机数：" + randomNum);
+
         return producerChannel.getStr(a);
     }
 
@@ -56,7 +65,7 @@ public class ConsumerController {
     @ApiImplicitParam(name = "dto", value = "测试dto", required = true, paramType = "body", dataType = "TestDto")
     @RequestMapping(value = "/test3", method = RequestMethod.POST)
     public String test3(@RequestBody TestDto dto) {
-        TestDto dto1 = new TestDto(){{
+        TestDto dto1 = new TestDto() {{
             setA(dto.getA());
             setB(dto.getB());
         }};

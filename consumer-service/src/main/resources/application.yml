@@ -74,6 +74,7 @@ feign:
 #      min-request-size: 2048 #压缩数据大小的下限
 #    response:
 #      enabled: true #配置响应GZIP压缩
+
 #熔断配置
 hystrix:
   command:
@@ -119,7 +120,7 @@ logging:
     com.wy: debug
     org.springframework.cloud.netflix: debug
     org.springframework.web: info
-    com.netflix.hystrix: debug
+    com.netflix.hystrix: info
 
 #swagger配置
 #请求地址 http://consumer-test.wangtoye.net:7205/swagger-ui.html
