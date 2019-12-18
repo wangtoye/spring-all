@@ -1,10 +1,10 @@
 package com.wy.consumerservice.common.config;
 
 import com.netflix.hystrix.strategy.concurrency.HystrixConcurrencyStrategy;
-import com.wy.consumerservice.common.strategy.FeignHystrixConcurrencyStrategy;
-import com.wy.consumerservice.common.strategy.call.warpper.FeignHystrixCallableWrapper;
-import com.wy.consumerservice.common.strategy.call.warpper.impl.RandomNumCallableWrapperImpl;
-import com.wy.consumerservice.common.strategy.call.warpper.impl.ThreadIdCallableWrapperImpl;
+import com.wangtoye.feignhystrixthreadlocalspringbootstarter.strategy.FeignHystrixConcurrencyStrategy;
+import com.wangtoye.feignhystrixthreadlocalspringbootstarter.strategy.call.warpper.FeignHystrixCallableWrapper;
+import com.wy.consumerservice.common.strategy.warpper.RandomNumCallableWrapperImpl;
+import com.wy.consumerservice.common.strategy.warpper.ThreadIdCallableWrapperImpl;
 import com.wy.consumerservice.utils.ThreadLocalUtil;
 import feign.Logger;
 import feign.RequestInterceptor;

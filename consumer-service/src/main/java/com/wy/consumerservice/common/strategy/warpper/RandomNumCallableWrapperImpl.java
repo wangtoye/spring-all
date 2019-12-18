@@ -1,7 +1,7 @@
-package com.wy.consumerservice.common.strategy.call.warpper.impl;
+package com.wy.consumerservice.common.strategy.warpper;
 
-import com.wy.consumerservice.common.strategy.call.callable.RandomNumCallable;
-import com.wy.consumerservice.common.strategy.call.warpper.FeignHystrixCallableWrapper;
+import com.wangtoye.feignhystrixthreadlocalspringbootstarter.strategy.call.warpper.FeignHystrixCallableWrapper;
+import com.wy.consumerservice.common.strategy.callable.RandomNumCallable;
 import com.wy.consumerservice.utils.ThreadLocalUtil;
 
 import java.util.concurrent.Callable;
