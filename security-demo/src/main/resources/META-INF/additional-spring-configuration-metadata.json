@@ -1,0 +1,29 @@
+{
+  "properties": [
+    {
+      "name": "jwt.secret.expire",
+      "type": "java.lang.String",
+      "description": "Description for jwt.secret.expire."
+    },
+    {
+      "name": "jwt.validTime",
+      "type": "java.lang.String",
+      "description": "Description for jwt.validTime."
+    },
+    {
+      "name": "jwt.expirationSeconds",
+      "type": "java.lang.String",
+      "description": "Description for jwt.expirationSeconds."
+    },
+    {
+      "name": "jwt.tokenPrefix",
+      "type": "java.lang.String",
+      "description": "Description for jwt.tokenPrefix."
+    },
+    {
+      "name": "jwt.tokenHeader",
+      "type": "java.lang.String",
+      "description": "Description for jwt.tokenHeader."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 package com.wy.securitydemo.common.constants;
 
 /**
- * @author wangye
+ * @author wangtoye
  */
 public enum ResponseCode {
     //默认success为false

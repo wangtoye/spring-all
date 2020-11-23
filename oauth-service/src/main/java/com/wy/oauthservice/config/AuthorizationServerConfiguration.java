@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 /**
  * 授权配置
  *
- * @author wangye
+ * @author wangtoye
  */
 @Configuration
 @EnableAuthorizationServer
@@ -79,7 +79,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Bean
     protected JwtAccessTokenConverter jwtTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey("wangye10");
+        converter.setSigningKey("wangtoye10");
         return converter;
     }
 }

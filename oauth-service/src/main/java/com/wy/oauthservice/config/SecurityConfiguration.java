@@ -3,7 +3,7 @@ package com.wy.oauthservice.config;
 /**
  * 安全配置，用户，认证，授权等等
  *
- * @author wangye
+ * @author wangtoye
  */
 //@Configuration
 //@EnableWebSecurity

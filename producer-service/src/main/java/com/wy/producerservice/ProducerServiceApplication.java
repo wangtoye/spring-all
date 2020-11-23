@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- * @author : wangye
+ * @author : wangtoye
  * @date : 2019-11-04
  * Description:
  */

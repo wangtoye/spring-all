@@ -3,7 +3,7 @@ package com.wy.oauthservice.config;
 ///*
 // * 资源配置
 // *
-// * @author wangye
+// * @author wangtoye
 // */
 //@Configuration
 //@EnableResourceServer

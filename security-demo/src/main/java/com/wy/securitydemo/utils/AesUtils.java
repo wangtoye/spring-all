@@ -12,7 +12,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * 对称加密解密AES算法
  *
- * @author wangye
+ * @author wangtoye
  */
 public class AesUtils {
 

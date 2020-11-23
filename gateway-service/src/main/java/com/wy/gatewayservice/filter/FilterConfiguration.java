@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Created with IntelliJ IDEA.
  *
- * @author: wangye
+ * @author: wangtoye
  * @date: 2019-07-02
  * Description:
  */

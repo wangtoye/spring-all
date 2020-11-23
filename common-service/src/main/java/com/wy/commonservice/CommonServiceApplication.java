@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.turbine.EnableTurbine;
 import zipkin2.server.internal.EnableZipkinServer;
 
 /**
- * @author : wangye
+ * @author : wangtoye
  * @date : 2019-11-04
  * Description:
  */

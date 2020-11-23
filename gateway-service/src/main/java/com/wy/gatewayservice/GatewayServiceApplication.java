@@ -7,7 +7,7 @@ import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 /**
  * 网关启动类
  *
- * @author wangye
+ * @author wangtoye
  */
 @SpringBootApplication
 @EnableHystrix

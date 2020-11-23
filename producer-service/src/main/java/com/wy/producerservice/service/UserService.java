@@ -5,10 +5,10 @@ import com.wy.producerservice.entity.User;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
- * @author wangye
+ * @author wangtoye
  * @since 2019-09-16
  */
 public interface UserService extends IService<User> {

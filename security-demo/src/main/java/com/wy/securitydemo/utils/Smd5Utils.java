@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 /**
- * @author : wangye
+ * @author : wangtoye
  * @date : 2019-11-04
  * Description: MD5加密工具类
  */

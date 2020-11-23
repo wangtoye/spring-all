@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * jwt生成token
  *
- * @author wangye
+ * @author wangtoye
  */
 public class JwtTokenUtil {
 

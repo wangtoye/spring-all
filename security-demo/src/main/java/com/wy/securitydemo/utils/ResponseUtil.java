@@ -4,7 +4,7 @@ import com.wy.securitydemo.common.constants.ResponseCode;
 import com.wy.securitydemo.dto.ResponseDto;
 
 /**
- * @author wangye
+ * @author wangtoye
  * @date 2017年8月7日
  */
 public class ResponseUtil {

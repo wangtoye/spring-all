@@ -9,7 +9,6 @@ import com.wy.securitydemo.common.config.security.handler.AjaxLogoutSuccessHandl
 import com.wy.securitydemo.common.config.security.provider.AjaxAuthenticationProvider;
 import com.wy.securitydemo.common.filter.JwtAuthenticationTokenFilter;
 import com.wy.securitydemo.service.SecurityUserServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -24,7 +23,7 @@ import javax.annotation.Resource;
 /**
  * Created with IntelliJ IDEA.
  *
- * @author: wangye
+ * @author: wangtoye
  * @date: 2019-09-30
  * Description:
  */
@@ -67,7 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
-    @Autowired
+    @Resource
     private SecurityUserServiceImpl securityUserServiceImpl;
 
     @Resource

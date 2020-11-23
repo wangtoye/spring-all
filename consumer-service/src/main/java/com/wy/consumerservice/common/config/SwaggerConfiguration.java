@@ -11,7 +11,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 /**
- * @author wangye
+ * @author wangtoye
  */
 @Configuration
 public class SwaggerConfiguration {

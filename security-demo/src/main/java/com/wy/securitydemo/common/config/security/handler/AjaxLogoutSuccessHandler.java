@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author : wangye
+ * @author : wangtoye
  * @date : 2019-09-30
  * Description: 登出成功
  */
@@ -27,10 +27,8 @@ public class AjaxLogoutSuccessHandler implements LogoutSuccessHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(AjaxLogoutSuccessHandler.class);
 
-
     @Resource
     private RedisUtil redisUtil;
-
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenPrefix}")

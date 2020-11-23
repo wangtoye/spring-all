@@ -18,7 +18,7 @@ import java.util.List;
  * feignClient的配置类
  * 日志级别 契约配置 拦截器配置
  *
- * @author wangye
+ * @author wangtoye
  */
 @Configuration
 public class FeignConfiguration {

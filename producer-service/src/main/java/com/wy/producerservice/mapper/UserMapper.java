@@ -10,7 +10,7 @@ import java.util.List;
  * Mapper 接口
  * </p>
  *
- * @author wangye
+ * @author wangtoye
  * @since 2019-09-16
  */
 public interface UserMapper extends BaseMapper<User> {
